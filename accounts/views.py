@@ -7,12 +7,7 @@ from rest_framework.views import APIView
 
 from .serializers import SignUpSerializer
 from .tokens import create_jwt_pair_for_user
-from rest_framework.permissions import (
-    IsAuthenticated,
-    AllowAny,
-    IsAuthenticatedOrReadOnly,
-    IsAdminUser,
-)
+
 # Create your views here.
 
 

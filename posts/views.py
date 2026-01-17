@@ -16,9 +16,37 @@ def homepage(request: Request):
         return Response(data= response, status= status.HTTP_201_CREATED)
     response = {"message": "Hello World"}
     return Response(data=response, status=status.HTTP_200_OK)
+  
 
+class PostListCreateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+  
+  serializer_class= PostSerializers
+  queryset = Post.objects.all()
+  
+  def get(self,request:Request, *args,**kwargs):
+    return self.list(request,*args,**kwargs)
+  
+  def post(self,request:Request,*args,**kwargs):
+    return self.create(request,*args, **kwargs)
+  
 
-# class PostListCreateView(APIView):
+class PostRetrieveUpdateDeleteView(generics.GenericAPIView,mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+  serializer_class = PostSerializers
+  queryset = Post.objects.all()
+  
+  def get(self, request: Request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+  def put(self, request: Request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+  def delete(self, request: Request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+    
+  
+
+#class PostListCreateView(APIView):
 #   serializer_class = PostSerializers
   
 #   def get(self, request:Request, *args, **kwargs):

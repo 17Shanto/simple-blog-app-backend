@@ -1,0 +1,44 @@
+Creating environment
+--------------------
+# python -m venv .venv
+# Activate run: .venv\Scripts\Activate.ps1
+
+Requirements.txt
+# pip freeze > requirements.txt
+
+Core Command:
+# django-admin
+
+Create project by Django Admin || Installing The django
+-------------------------------------------------------
+# django-admin startproject simpleblog .
+# python manage.py runserver
+
+Installing Django Rest Framework
+--------------------------------
+# pip install djangorestframework
+# pip list
+
+Starting The Project
+--------------------
+||Creating Post App
+	# python manage.py startapp posts
+Note After Creating every app. You have to go to the main app's
+settings.py file and enlist your new App in installed_apss and you have add also 'rest_framwork' in array
+
+
+Migration Model
+---------------
+# python manage.py makemigrations
+# python manage.py migrate
+
+Create Super User
+-----------------
+# python manage.py createsuperuser
+
+JWT- Authentication
+-------------------
+# pip install djangorestframework-simplejwt
+
+
+

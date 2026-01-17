@@ -1,13 +1,21 @@
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import generics, mixins, status
-from rest_framework.decorators import api_view, APIView
+from rest_framework.decorators import api_view, APIView, permission_classes
 from .models import Post
 from .serializers import PostSerializers
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+    IsAdminUser,
+)
 
 
 @api_view(http_method_names=["GET", "POST"])
+@permission_classes([AllowAny])
+
 def homepage(request: Request):
     
     if(request.method == "POST"):
@@ -21,6 +29,7 @@ def homepage(request: Request):
 class PostListCreateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
   
   serializer_class= PostSerializers
+  permission_classes = [IsAuthenticatedOrReadOnly]
   queryset = Post.objects.all()
   
   def get(self,request:Request, *args,**kwargs):
